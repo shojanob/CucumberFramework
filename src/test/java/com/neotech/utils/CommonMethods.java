@@ -21,9 +21,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.neotech.testbase.BaseClass;
+import com.neotech.testbase.PageInitializer;
 
-public class CommonMethods extends BaseClass {
+public class CommonMethods extends PageInitializer {
 
 	/**
 	 * This method clears a textbox and sends another text.

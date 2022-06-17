@@ -36,6 +36,8 @@ public class BaseClass {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT_TIME));
 		driver.manage().window().maximize();
 		driver.get(ConfigsReader.getProperty("url"));
+		
+		PageInitializer.initialize();
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.neotech.steps;
 
 import com.neotech.pages.DashboardPageElements;
 import com.neotech.pages.LoginPageElements;
+import com.neotech.testbase.PageInitializer;
 import com.neotech.utils.CommonMethods;
 import com.neotech.utils.ConfigsReader;
 
@@ -11,14 +12,14 @@ import io.cucumber.java.en.When;
 
 public class LoginSteps extends CommonMethods {
 
-	LoginPageElements login;
-	DashboardPageElements dashboard;
+//	LoginPageElements login;
+//	DashboardPageElements dashboard;
 
 	@Given("I navigated to the HRM website")
 	public void i_navigated_to_the_hrm_website() {
 		setUp();
-		login = new LoginPageElements();
-		dashboard = new DashboardPageElements();
+//		login = new LoginPageElements();
+//		dashboard = new DashboardPageElements();
 	}
 
 	@When("I enter a valid username")
@@ -53,6 +54,23 @@ public class LoginSteps extends CommonMethods {
 	@Then("I will quit the browser")
 	public void i_will_quit_the_browser() {
 		tearDown();
+	}
+
+	@When("I enter an invalid password")
+	public void i_enter_an_invalid_password() {
+		sendText(login.password, "Horosho");
+	}
+
+	@Then("I validate that Invalid Credentials is displayed")
+	public void i_validate_that_invalid_credentials_is_displayed() {
+		String expectedMsg = "Invalid Credentials";
+		String actualMsg = login.invalidMsg.getText();
+
+		if (actualMsg.equals(expectedMsg)) {
+			System.out.println("Test Passed!");
+		} else {
+			System.out.println("Test Failed!");
+		}
 	}
 
 }
