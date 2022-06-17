@@ -73,4 +73,13 @@ public class LoginSteps extends CommonMethods {
 		}
 	}
 
+	@Given("user is logged in with valid credentials")
+	public void user_is_logged_in_with_valid_credentials() {
+		// This is done in the Hooks
+		// setUp();
+		sendText(login.username, ConfigsReader.getProperty("username"));
+		sendText(login.password, ConfigsReader.getProperty("password"));
+		click(login.logInButton);
+	}
+
 }
