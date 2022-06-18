@@ -6,9 +6,9 @@ Feature: Background Example
 	
 	@background
   Scenario: Example1
-    When Test number nr1
+    When Test number nr1 firstname is "Brian" and lastname is "Smith"
     And Test number nr2
-    And Test number nr3
+    And Test number nr3 age is 30
     Then Validation Nr1
     And Validation Nr2
 	
