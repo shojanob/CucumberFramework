@@ -36,3 +36,17 @@ Feature: Add Employee Feature
     And user provides credentials
     And user clicks on save button
     Then validate that employee is added successfully
+
+  #To perform DDT using Scenario Outline and Examples keyword
+  @scenarioOutline
+  Scenario Outline: Adding multiple employees with scenario outline
+    When user enters employee "<FirstName>", "<MiddleName>" and "<LastName>"
+    And user selects a location "<Location>"
+    And user clicks on save button
+    Then validate that "<FirstName>" and "<LastName>" is added successfully
+
+    Examples: 
+      | FirstName | MiddleName | LastName | Location                         |
+      | Joe       | R          | Biden    | London Office                    |
+      | Donald    | J          | Trump    | Chinese Development Center       |
+      | Barack    | H          | Obama    | South African Development Center |

@@ -81,4 +81,27 @@ public class AddEmployee extends CommonMethods {
 		wait(1);
 	}
 
+	// Extra methods from Scenario Outline
+	@When("user enters employee {string}, {string} and {string}")
+	public void user_enters_employee_and(String first_name, String middle_name, String last_name) {
+		sendText(addEmployee.firstName, first_name);
+		sendText(addEmployee.middleName, middle_name);
+		sendText(addEmployee.lastName, last_name);
+	}
+
+	@When("user selects a location {string}")
+	public void user_selects_a_location(String location) {
+		selectDropdown(addEmployee.location, location);
+	}
+
+	@Then("validate that {string} and {string} is added successfully")
+	public void validate_that_and_is_added_successfully(String firstN, String lastN) {
+		waitForVisibility(personalDetails.personalDetailsForm);
+
+		String expectedName = firstN + " " + lastN;
+		String actualName = personalDetails.employeeName.getText();
+
+		Assert.assertEquals("The name DOES NOT match!", expectedName, actualName);
+	}
+
 }
