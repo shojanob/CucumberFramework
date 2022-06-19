@@ -50,3 +50,12 @@ Feature: Add Employee Feature
       | Joe       | R          | Biden    | London Office                    |
       | Donald    | J          | Trump    | Chinese Development Center       |
       | Barack    | H          | Obama    | South African Development Center |
+
+  #To perform DDT using Datatable
+  @dataTable
+  Scenario: Adding multiple employees with Datatable
+    When user enters employee details and clicks on save and validates it is added
+      | FirstName | MiddleName | LastName |
+      | Ozer      | O          | Okten    |
+      | Ozan      | A          | Tuncay   |
+      | Daler     | M          | Mannonov |

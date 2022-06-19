@@ -1,9 +1,13 @@
 package com.neotech.steps;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 
 import com.neotech.utils.CommonMethods;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -98,10 +102,51 @@ public class AddEmployee extends CommonMethods {
 	public void validate_that_and_is_added_successfully(String firstN, String lastN) {
 		waitForVisibility(personalDetails.personalDetailsForm);
 
-		String expectedName = firstN + " " + lastN;
+		String expectedName = firstN + "-" + lastN;
 		String actualName = personalDetails.employeeName.getText();
 
 		Assert.assertEquals("The name DOES NOT match!", expectedName, actualName);
+	}
+
+	// Extra methods from DataTable
+	@When("user enters employee details and clicks on save and validates it is added")
+	public void user_enters_employee_details_and_clicks_on_save_and_validates_it_is_added(DataTable table) {
+		System.out.println(table);
+
+		// asMaps() method converts DataTable into a List of Maps
+		List<Map<String, String>> empList = table.asMaps();
+		// System.out.println(empList);
+
+		for (Map<String, String> employee : empList) {
+			System.out.println(employee);
+
+			String fName = employee.get("FirstName");
+			String mName = employee.get("MiddleName");
+			String lName = employee.get("LastName");
+
+			sendText(addEmployee.firstName, fName);
+			sendText(addEmployee.middleName, mName);
+			sendText(addEmployee.lastName, lName);
+
+			selectDropdown(addEmployee.location, "London Office");
+
+			wait(1);
+
+			click(addEmployee.saveBtn);
+
+			waitForVisibility(personalDetails.personalDetailsForm);
+
+			// Validation
+			String expectedTxt = fName + " " + lName;
+			String actualTxt = personalDetails.employeeName.getText();
+
+			Assert.assertEquals("The name DOES NOT match!", expectedTxt, actualTxt);
+
+			// Before next iteration
+			// We need to go to Add Employee page again
+			wait(1);
+			click(dashboard.addEmployeeLink);
+		}
 	}
 
 }
