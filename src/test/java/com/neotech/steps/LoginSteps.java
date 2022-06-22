@@ -1,11 +1,14 @@
 package com.neotech.steps;
 
-import com.neotech.pages.DashboardPageElements;
-import com.neotech.pages.LoginPageElements;
-import com.neotech.testbase.PageInitializer;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+
 import com.neotech.utils.CommonMethods;
 import com.neotech.utils.ConfigsReader;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -80,6 +83,66 @@ public class LoginSteps extends CommonMethods {
 		sendText(login.username, ConfigsReader.getProperty("username"));
 		sendText(login.password, ConfigsReader.getProperty("password"));
 		click(login.logInButton);
+	}
+
+	@When("user enters login information {string} and {string}")
+	public void user_enters_login_information_and(String username, String password) {
+		sendText(login.username, username);
+		sendText(login.password, password);
+
+		wait(2);
+
+	}
+
+	@Then("verify that the {string} is shown")
+	public void verify_that_the_is_shown(String expectedAccountName) {
+		String actualAccountName = dashboard.accountName.getText();
+
+		Assert.assertEquals("The account name did not match!", expectedAccountName, actualAccountName);
+
+	}
+
+	@When("user enters username and password and clicks on the login button")
+	public void loginUsingDataTable(DataTable dataTable) {
+
+		// we have all of our data here
+
+		// TODO for all the rows of the data table
+		// send login credentials
+		// click login button
+		// verify
+		// logout --- sends us back to the login screen and ready for the next data to
+		// test
+
+		// get the data in a list of maps
+		List<Map<String, String>> listOfMaps = dataTable.asMaps();
+
+		System.out.println(listOfMaps);
+
+		// loop on each map (because each map gives us a user)
+		for (Map<String, String> map : listOfMaps) {
+			System.out.println("Testing: " + map.get("username") + " : " + map.get("password"));
+			// login
+			sendText(login.username, map.get("username"));
+			sendText(login.password, map.get("password"));
+
+			click(login.logInButton);
+
+			wait(1);
+
+			// take a screenshot
+
+			// validate
+			String actualAccountName = dashboard.accountName.getText();
+
+			Assert.assertEquals(map.get("employeeName"), actualAccountName);
+
+			// logout
+			dashboard.accountMenu.click();
+			dashboard.logout.click();
+
+		}
+
 	}
 
 }
