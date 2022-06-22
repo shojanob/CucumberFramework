@@ -1,5 +1,7 @@
 package com.neotech.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -25,6 +27,15 @@ public class DashboardPageElements extends CommonMethods {
 
 	@FindBy(id = "logoutLink")
 	public WebElement logout;
+	
+	@FindBy(xpath="//div[@id = 'menu-content']/ul/li")
+	public List<WebElement> menuList;
+	
+	
+	@FindBy(xpath="//li[@id='menu_news_More']/a")
+	public WebElement moreMenuItem;
+	
+	
 
 	public DashboardPageElements() {
 		PageFactory.initElements(driver, this);
