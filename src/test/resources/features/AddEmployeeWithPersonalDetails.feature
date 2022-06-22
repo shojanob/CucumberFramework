@@ -9,11 +9,10 @@ Feature: Add Employee With Personal Details
   Scenario Outline: Add and Modify Employee Details
     When user enters employee first name "<FirstName>" and last name "<LastName>"
     And user clicks on save button
-    And I click on Personal Details Edit
-    Then I am able to modify Employee Details "<DriverLicence>", "<ExpirationDate>", "<SSN>", "<Gender>", "<Nationality>"
+    Then I am able to modify Employee Details "<DriverLicense>", "<ExpirationDate>", "<Smoker>", "<Gender>", "<Nationality>"
     And I click on Personal Details Save
 
     Examples: 
-      | FirstName | LastName | DriverLicence | ExpirationDate | SSN         | Gender | Nationality |
-      | Lionel    | Messi    | N78787886     | 2024-02-08     | 123-45-6789 | Male   | Argentinean |
-      | Angelina  | Jolie    | T55578855     | 2023-05-10     | 234-56-7890 | Female | American    |
+      | FirstName | LastName | DriverLicense | ExpirationDate | Smoker | Gender | Nationality |
+      | Lionel    | Messi    | N78787886     | 2024-02-08     | No     | Male   | Argentinean |
+      | Angelina  | Jolie    | T55578855     | 2023-05-10     | Yes    | Female | American    |
