@@ -29,25 +29,50 @@ public class PersonalDetailsSteps extends CommonMethods {
 		// click(driver.findElement(By.xpath("//span[text()='" + gender + "']")));
 
 		// 2nd way
-		List<WebElement> genderList = personalDetails.genderOptions;
+		clickOnElement(personalDetails.genderOptions, gender);
+
+		click(personalDetails.nationalityInput);
+		clickOnElement(personalDetails.nationalityOptions, nation);
+		wait(1);
+
+		// Select the date
+		click(personalDetails.licExpDate); // Will show the calendar
+
+		String[] parts = expDate.split("-"); // 2023-05-10
+
+		// Selecting the year
+		click(personalDetails.licExpYearInput); // Will show the years
+		clickOnElement(personalDetails.licExpYearOptions, parts[0]);
+
+		// Selecting the month
+		click(personalDetails.licExpMonthInput); // Will show the months
+
+		int m = Integer.parseInt(parts[1]); // Converting 05 to 5
+		click(personalDetails.licExpMonthOptions.get(m - 1)); // Because May is index 5 - 1 = 4
+
+		// Selecting the day
+		int d = Integer.parseInt(parts[2]); // Converting String to int
+		selectCalendarDate(personalDetails.licExpDays, d + ""); // converting 10 to a String
 
 		wait(1);
-		for (WebElement option : genderList) {
-			if (option.getText().equals(gender)) {
+
+	}
+
+	public void clickOnElement(List<WebElement> list, String value) {
+		wait(1);
+		for (WebElement option : list) {
+			System.out.println(option.getText());
+			if (option.getText().equals(value)) {
 				click(option);
 				break;
 			}
 		}
-
-		// Task until 8:20: Select the Nationality
-
-		wait(5);
-
 	}
 
 	@Then("I click on Personal Details Save")
 	public void i_click_on_personal_details_save() {
-
+		jsClick(personalDetails.detailsBtnSave);
+		wait(3);
 	}
 
 }
