@@ -15,5 +15,5 @@ Feature: Add Employee With Personal Details
 
     Examples: 
       | FirstName | LastName | DriverLicense | ExpirationDate | Smoker | Gender | Nationality |
-      | Lionel    | Messi    | N78787886     | 2024-02-08     | No     | Male   | Argentinean |
+      #| Lionel    | Messi    | N78787886     | 2024-02-08     | No     | Male   | Argentinean |
       | Angelina  | Jolie    | T55578855     | 2023-05-10     | Yes    | Female | American    |
