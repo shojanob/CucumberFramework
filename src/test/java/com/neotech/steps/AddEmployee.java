@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Assert;
 
 import com.neotech.utils.CommonMethods;
+import com.neotech.utils.ExcelUtility;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -147,6 +148,52 @@ public class AddEmployee extends CommonMethods {
 			wait(1);
 			click(dashboard.addEmployeeLink);
 		}
+	}
+
+	@When("user enters employee data from {string} excel sheet then save")
+	public void user_enters_employee_data_from_excel_sheet_then_save(String sheetName) {
+
+		String path = System.getProperty("user.dir") + "/src/test/resources/testData/Excel.xlsx";
+		List<Map<String, String>> excelList = ExcelUtility.excelIntoListOfMaps(path, sheetName);
+
+		for (Map<String, String> dataMap : excelList) {
+			String fName = dataMap.get("FirstName");
+			String lName = dataMap.get("LastName");
+			String user = dataMap.get("Username");
+			String pass = dataMap.get("Password");
+
+			System.out.println(fName + " " + lName + " " + user + " " + pass);
+
+			sendText(addEmployee.firstName, fName);
+			sendText(addEmployee.lastName, lName);
+			selectDropdown(addEmployee.location, "London Office");
+			wait(1);
+
+			jsClick(addEmployee.checkBoxLoginDetails);
+			wait(1);
+
+			sendText(addEmployee.username, user);
+			sendText(addEmployee.password, pass);
+			sendText(addEmployee.confirmPassword, pass);
+			wait(1);
+
+			click(addEmployee.saveBtn);
+
+			waitForVisibility(personalDetails.personalDetailsForm);
+
+			// Assertion
+			String expectedTxt = fName + " " + lName;
+			String actualTxt = personalDetails.employeeName.getText();
+
+			Assert.assertEquals("Employee is NOT added!", expectedTxt, actualTxt);
+
+			// Before next iteration
+			// We need to go to Add Employee page again
+			wait(1);
+			click(dashboard.addEmployeeLink);
+			wait(1);
+		}
+
 	}
 
 }

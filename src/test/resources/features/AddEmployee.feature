@@ -59,3 +59,7 @@ Feature: Add Employee Feature
       | Ozer      | O          | Okten    |
       | Ozan      | A          | Tuncay   |
       | Daler     | M          | Mannonov |
+
+  @excelDataTable
+  Scenario: Add multiple employees from Excel
+    When user enters employee data from "Employee" excel sheet then save
