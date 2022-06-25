@@ -19,9 +19,20 @@ import io.cucumber.junit.CucumberOptions;
 		dryRun = false,
 
 		// tags can do the same thing groups on TestNG do
-		tags = "@search",
+		tags = "@HW",
 
-		monochrome = true)
+		monochrome = true, 
+		
+		plugin = {
+				// prints the ghergin steps into the console
+				"pretty",
+				// creates a basic html report in the target folder
+				"html:target/cucumber-default-report.html",
+				//store every step of execution into this json file
+				"json:target/cucumber.json"
+				}
+
+)
 
 public class TestRunner {
 
