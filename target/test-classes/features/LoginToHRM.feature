@@ -19,7 +19,7 @@ Feature: Login Functionality
     Then I validate that Invalid Credentials is displayed
     Then I will quit the browser
 
-  @HW
+  @HW @regression
   Scenario Outline: Login using Scenario Outline and Example Table
     When user enters login information "<username>" and "<password>"
     And I click on the login button

@@ -7,7 +7,7 @@ Feature: Search for Employee
     When user enters valid employee id
     And clicks on search button
     Then employee information is displayed
-
+	@regression
   Scenario: Search employee by first and last name
     Given user is logged in with valid credentials
     And user navigates to the employee list page

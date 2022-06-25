@@ -20,7 +20,8 @@ public class LoginSteps extends CommonMethods {
 
 	@Given("I navigated to the HRM website")
 	public void i_navigated_to_the_hrm_website() {
-		setUp();
+		// commented this out in lesson 06 because we have Hooks.java
+		//	setUp();
 //		login = new LoginPageElements();
 //		dashboard = new DashboardPageElements();
 	}
@@ -56,7 +57,8 @@ public class LoginSteps extends CommonMethods {
 
 	@Then("I will quit the browser")
 	public void i_will_quit_the_browser() {
-		tearDown();
+	// commented this out in lesson 06 because we have Hooks.java
+	//	tearDown();
 	}
 
 	@When("I enter an invalid password")
