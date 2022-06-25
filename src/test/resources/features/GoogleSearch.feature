@@ -1,5 +1,7 @@
+@search
 Feature: Searching in Google
 
+	@searchByTyping
   Scenario: Search by typing
     Given I navigated to Google
     When I type something on the search box

@@ -361,7 +361,25 @@ public class CommonMethods extends PageInitializer {
 	 * 
 	 * @param filename
 	 */
-	public static String takeScreenshot(String filename) {
+	/*
+	 * public static String takeScreenshot(String filename) {
+	 * 
+	 * TakesScreenshot ts = (TakesScreenshot) driver;
+	 * 
+	 * File source = ts.getScreenshotAs(OutputType.FILE);
+	 * 
+	 * // we want to create a filename that is unique: for example name+timestamp //
+	 * (validLogin2022_06_07_20_40_40) String destination =
+	 * Constants.SCREENSHOT_FILEPATH + filename + getTimeStamp() + ".png";
+	 * 
+	 * try { FileUtils.copyFile(source, new File(destination)); } catch (IOException
+	 * e) { System.out.println("Cannot take Screenshot!"); }
+	 * 
+	 * return destination; }
+	 * 
+	 */
+	
+	public static byte[] takeScreenshot(String filename) {
 
 		TakesScreenshot ts = (TakesScreenshot) driver;
 
@@ -376,9 +394,16 @@ public class CommonMethods extends PageInitializer {
 		} catch (IOException e) {
 			System.out.println("Cannot take Screenshot!");
 		}
+		
+		//get the screenshot as a byte[] and return it
+		
+		byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
+		
 
-		return destination;
+		return picBytes;
 	}
+	
+	
 
 	/**
 	 * This method returns the timestamp in a String format.

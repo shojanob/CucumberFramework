@@ -12,7 +12,7 @@ Feature: Background Example
     Then Validation Nr1
     And Validation Nr2
 	
-	@background
+	@background @search
   Scenario: Example2
     When Test number nr4
     And Test number nr5
